@@ -8,9 +8,10 @@ dependencies {
   // explicitly depend on RxJava's latest version for bug fixes and new features.
   // (see https://github.com/ReactiveX/RxJava/releases for latest 3.x.x version)
   implementation 'io.reactivex.rxjava3:rxjava:3.1.5'
-  implementation 'androidx.test:monitor:1.7.2'
-  implementation 'androidx.test.ext:junit-ktx:1.2.1'
-  androidTestImplementation 'org.testng:testng:6.9.6'
+
+//  implementation 'androidx.test:monitor:1.7.2'
+//  implementation 'androidx.test.ext:junit-ktx:1.2.1'
+//  androidTestImplementation 'org.testng:testng:6.9.6'
 }
 
 android {
@@ -24,9 +25,9 @@ android {
     consumerProguardFiles 'proguard-rules.pro'
   }
 
-  dexOptions {
-    preDexLibraries = false
-  }
+//  dexOptions {
+//    preDexLibraries = false
+//  }
 }
 
 def file = project.rootProject.file('local.properties')
@@ -91,24 +92,24 @@ properties.load(project.rootProject.file('local.properties').newDataInputStream(
 //  }
 //}
 
-task sourcesJar(type: Jar) {
-  from android.sourceSets.main.java.srcDirs
-  classifier = 'sources'
-}
-
-task javadoc(type: Javadoc) {
-  source = android.sourceSets.main.java.srcDirs
-  classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-  classifier = 'javadoc'
-  from javadoc.destinationDir
-}
-artifacts {
-  archives javadocJar
-  archives sourcesJar
-}
+//task sourcesJar(type: Jar) {
+//  from android.sourceSets.main.java.srcDirs
+//  classifier = 'sources'
+//}
+//
+//task javadoc(type: Javadoc) {
+//  source = android.sourceSets.main.java.srcDirs
+//  classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+//}
+//
+//task javadocJar(type: Jar, dependsOn: javadoc) {
+//  classifier = 'javadoc'
+//  from javadoc.destinationDir
+//}
+//artifacts {
+//  archives javadocJar
+//  archives sourcesJar
+//}
 //
 //task findConventions << {
 //  println project.getConvention()

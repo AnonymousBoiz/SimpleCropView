@@ -33,7 +33,6 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.12.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.lifecycle:lifecycle-process:2.7.0'
     implementation 'androidx.activity:activity:1.9.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
@@ -42,8 +41,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':simplecropview')
 
-    implementation "com.github.hotchemi:permissionsdispatcher:$permissionsDispatcherVersion"
-    annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:$permissionsDispatcherVersion"
+//    implementation "com.github.hotchemi:permissionsdispatcher:$permissionsDispatcherVersion"
+//    annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:$permissionsDispatcherVersion"
 //  implementation "com.tbruyelle.rxpermissions2:rxpermissions:$rxPermissionsVersion"
 //  implementation 'com.github.tbruyelle:rxpermissions:0.12'
     implementation project(':rxpermissons')
@@ -55,7 +54,4 @@ dependencies {
     // explicitly depend on RxJava's latest version for bug fixes and new features.
     // (see https://github.com/ReactiveX/RxJava/releases for latest 3.x.x version)
     implementation 'io.reactivex.rxjava3:rxjava:3.1.5'
-
-    implementation 'com.google.guava:guava:27.0.1-android'
-
 }

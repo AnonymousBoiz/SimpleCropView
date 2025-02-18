@@ -25,9 +25,9 @@ public class BasicActivity extends AppCompatActivity {
 
     setContentView(R.layout.activity_basic);
 
-    if(savedInstanceState == null){
-      getSupportFragmentManager().beginTransaction().add(R.id.container, BasicFragment.newInstance()).commit();
-    }
+//    if(savedInstanceState == null){
+//      getSupportFragmentManager().beginTransaction().add(R.id.container, BasicFragment.newInstance()).commit();
+//    }
 
     // apply custom font
     FontUtils.setFont(findViewById(R.id.root_layout));
