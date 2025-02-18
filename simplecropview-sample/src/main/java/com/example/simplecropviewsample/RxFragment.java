@@ -13,28 +13,33 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import com.isseiaoki.simplecropview.CropImageView;
 import com.isseiaoki.simplecropview.util.Logger;
 import com.isseiaoki.simplecropview.util.Utils;
-import com.tbruyelle.rxpermissions2.RxPermissions;
-import io.reactivex.CompletableSource;
-import io.reactivex.SingleSource;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
-import io.reactivex.functions.Predicate;
-import io.reactivex.schedulers.Schedulers;
+import com.tbruyelle.rxpermissions3.RxPermissions;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.CompletableSource;
+import io.reactivex.rxjava3.core.SingleSource;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.functions.Action;
+import io.reactivex.rxjava3.functions.Consumer;
+import io.reactivex.rxjava3.functions.Function;
+import io.reactivex.rxjava3.functions.Predicate;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class RxFragment extends Fragment {
   private static final String TAG = RxFragment.class.getSimpleName();
@@ -122,16 +127,17 @@ public class RxFragment extends Fragment {
 
   private Disposable loadImage(final Uri uri) {
     mSourceUri = uri;
+
     return new RxPermissions(getActivity()).request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
         .filter(new Predicate<Boolean>() {
-          @Override public boolean test(@io.reactivex.annotations.NonNull Boolean granted)
+          @Override public boolean test(@NonNull Boolean granted)
               throws Exception {
             return granted;
           }
         })
         .flatMapCompletable(new Function<Boolean, CompletableSource>() {
           @Override
-          public CompletableSource apply(@io.reactivex.annotations.NonNull Boolean aBoolean)
+          public CompletableSource apply(@NonNull Boolean aBoolean)
               throws Exception {
             return mCropView.load(uri)
                 .useThumbnail(true)
@@ -154,7 +160,7 @@ public class RxFragment extends Fragment {
     return mCropView.crop(mSourceUri)
         .executeAsSingle()
         .flatMap(new Function<Bitmap, SingleSource<Uri>>() {
-          @Override public SingleSource<Uri> apply(@io.reactivex.annotations.NonNull Bitmap bitmap)
+          @Override public SingleSource<Uri> apply(@NonNull Bitmap bitmap)
               throws Exception {
             return mCropView.save(bitmap)
                 .compressFormat(mCompressFormat)
@@ -162,7 +168,7 @@ public class RxFragment extends Fragment {
           }
         })
         .doOnSubscribe(new Consumer<Disposable>() {
-          @Override public void accept(@io.reactivex.annotations.NonNull Disposable disposable)
+          @Override public void accept(@NonNull Disposable disposable)
               throws Exception {
             showProgress();
           }
@@ -175,11 +181,11 @@ public class RxFragment extends Fragment {
         .subscribeOn(Schedulers.newThread())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new Consumer<Uri>() {
-          @Override public void accept(@io.reactivex.annotations.NonNull Uri uri) throws Exception {
+          @Override public void accept(@NonNull Uri uri) throws Exception {
             ((RxActivity) getActivity()).startResultActivity(uri);
           }
         }, new Consumer<Throwable>() {
-          @Override public void accept(@io.reactivex.annotations.NonNull Throwable throwable)
+          @Override public void accept(@NonNull Throwable throwable)
               throws Exception {
           }
         });
@@ -224,7 +230,7 @@ public class RxFragment extends Fragment {
 
   public void dismissProgress() {
     if (!isResumed()) return;
-    android.support.v4.app.FragmentManager manager = getFragmentManager();
+    FragmentManager manager = getFragmentManager();
     if (manager == null) return;
     ProgressDialogFragment f = (ProgressDialogFragment) manager.findFragmentByTag(PROGRESS_DIALOG);
     if (f != null) {

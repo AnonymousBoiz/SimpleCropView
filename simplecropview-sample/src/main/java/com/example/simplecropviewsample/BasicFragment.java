@@ -14,14 +14,17 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import com.isseiaoki.simplecropview.CropImageView;
 import com.isseiaoki.simplecropview.callback.CropCallback;
 import com.isseiaoki.simplecropview.callback.LoadCallback;
@@ -31,12 +34,12 @@ import com.isseiaoki.simplecropview.util.Utils;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.OnShowRationale;
 import permissions.dispatcher.PermissionRequest;
-import permissions.dispatcher.RuntimePermissions;
 
-@RuntimePermissions public class BasicFragment extends Fragment {
+public class BasicFragment extends Fragment {
   private static final String TAG = BasicFragment.class.getSimpleName();
 
   private static final int REQUEST_PICK_IMAGE = 10011;
@@ -131,7 +134,7 @@ import permissions.dispatcher.RuntimePermissions;
   @Override public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
       @NonNull int[] grantResults) {
     super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    BasicFragmentPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
+//    BasicFragmentPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
   }
 
   // Bind views //////////////////////////////////////////////////////////////////////////////////
@@ -188,7 +191,7 @@ import permissions.dispatcher.RuntimePermissions;
 
   public void dismissProgress() {
     if (!isResumed()) return;
-    android.support.v4.app.FragmentManager manager = getFragmentManager();
+    FragmentManager manager = getFragmentManager();
     if (manager == null) return;
     ProgressDialogFragment f = (ProgressDialogFragment) manager.findFragmentByTag(PROGRESS_DIALOG);
     if (f != null) {
@@ -290,7 +293,7 @@ import permissions.dispatcher.RuntimePermissions;
     @Override public void onClick(View v) {
       switch (v.getId()) {
         case R.id.buttonDone:
-          BasicFragmentPermissionsDispatcher.cropImageWithCheck(BasicFragment.this);
+//          BasicFragmentPermissionsDispatcher.cropImageWithCheck(BasicFragment.this);
           break;
         case R.id.buttonFitImage:
           mCropView.setCropMode(CropImageView.CropMode.FIT_IMAGE);
@@ -329,7 +332,7 @@ import permissions.dispatcher.RuntimePermissions;
           mCropView.rotateImage(CropImageView.RotateDegrees.ROTATE_90D);
           break;
         case R.id.buttonPickImage:
-          BasicFragmentPermissionsDispatcher.pickImageWithCheck(BasicFragment.this);
+//          BasicFragmentPermissionsDispatcher.pickImageWithCheck(BasicFragment.this);
           break;
       }
     }
