@@ -15,6 +15,7 @@ dependencies {
 }
 
 android {
+  namespace 'com.isseiaoki.simplecropview'
   compileSdk 34
 
   defaultConfig {

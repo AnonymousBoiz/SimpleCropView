@@ -167,11 +167,11 @@ public class RxPermissions {
             }
         };
     }
+/**
+ * Request permissions immediately, <b>must be invoked during initialization phase
+ * of your application</b>.
+ */
 
-    /**
-     * Request permissions immediately, <b>must be invoked during initialization phase
-     * of your application</b>.
-     */
     @SuppressWarnings({"WeakerAccess", "unused"})
     public Observable<Boolean> request(final String... permissions) {
         return Observable.just(TRIGGER).compose(ensure(permissions));
