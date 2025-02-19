@@ -31,28 +31,29 @@ public class RxPermissionsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRetainInstance(true);
+
     }
 
-    @TargetApi(Build.VERSION_CODES.M)
     void requestPermissions(@NonNull String[] permissions) {
-        requestPermissions(permissions, PERMISSIONS_REQUEST_CODE);
-    }
-
-    @TargetApi(Build.VERSION_CODES.M)
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        if (requestCode != PERMISSIONS_REQUEST_CODE) return;
-
-        boolean[] shouldShowRequestPermissionRationale = new boolean[permissions.length];
-
-        for (int i = 0; i < permissions.length; i++) {
-            shouldShowRequestPermissionRationale[i] = shouldShowRequestPermissionRationale(permissions[i]);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requireActivity().requestPermissions(permissions, PERMISSIONS_REQUEST_CODE);
         }
-
-        onRequestPermissionsResult(permissions, grantResults, shouldShowRequestPermissionRationale);
     }
+
+
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//
+//        if (requestCode != PERMISSIONS_REQUEST_CODE) return;
+//
+//        boolean[] shouldShowRequestPermissionRationale = new boolean[permissions.length];
+//
+//        for (int i = 0; i < permissions.length; i++) {
+//            shouldShowRequestPermissionRationale[i] = shouldShowRequestPermissionRationale(permissions[i]);
+//        }
+//
+//        onRequestPermissionsResult(permissions, grantResults, shouldShowRequestPermissionRationale);
+//    }
 
     void onRequestPermissionsResult(String[] permissions, int[] grantResults, boolean[] shouldShowRequestPermissionRationale) {
         for (int i = 0, size = permissions.length; i < size; i++) {
@@ -71,22 +72,26 @@ public class RxPermissionsFragment extends Fragment {
         }
     }
 
-    @TargetApi(Build.VERSION_CODES.M)
+
     boolean isGranted(String permission) {
         final FragmentActivity fragmentActivity = getActivity();
         if (fragmentActivity == null) {
             throw new IllegalStateException("This fragment must be attached to an activity.");
         }
-        return fragmentActivity.checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            return fragmentActivity.checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED;
+        }else return false;
     }
 
-    @TargetApi(Build.VERSION_CODES.M)
+
     boolean isRevoked(String permission) {
         final FragmentActivity fragmentActivity = getActivity();
         if (fragmentActivity == null) {
             throw new IllegalStateException("This fragment must be attached to an activity.");
         }
-        return fragmentActivity.getPackageManager().isPermissionRevokedByPolicy(permission, getActivity().getPackageName());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            return fragmentActivity.getPackageManager().isPermissionRevokedByPolicy(permission, getActivity().getPackageName());
+        }else return false;
     }
 
     public void setLogging(boolean logging) {

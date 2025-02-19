@@ -261,7 +261,7 @@ public class RxPermissions {
         return Observable.just(shouldShowRequestPermissionRationaleImplementation(activity, permissions));
     }
 
-    @TargetApi(Build.VERSION_CODES.M)
+
     private boolean shouldShowRequestPermissionRationaleImplementation(final Activity activity, final String... permissions) {
         for (String p : permissions) {
             if (!isGranted(p) && !activity.shouldShowRequestPermissionRationale(p)) {
@@ -271,7 +271,7 @@ public class RxPermissions {
         return true;
     }
 
-    @TargetApi(Build.VERSION_CODES.M)
+
     void requestPermissionsFromFragment(String[] permissions) {
         mRxPermissionsFragment.get().log("requestPermissionsFromFragment " + TextUtils.join(", ", permissions));
         mRxPermissionsFragment.get().requestPermissions(permissions);
