@@ -47,11 +47,15 @@ Supported on API Level 14 and above.
 Include the following dependency in your `build.gradle` file. **Please use the latest version available.**
 
 ```groovy
-repositories {
-    jcenter()
-}
+dependencyResolutionManagement {
+		repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+		repositories {
+			mavenCentral()
+			maven { url 'https://jitpack.io' }
+		}
+	}
 dependencies {
-    compile 'com.isseiaoki:simplecropview:1.1.8'
+	        implementation 'com.github.AnonymousBoiz:SimpleCropView:latest-release'
 }
 ```
 
