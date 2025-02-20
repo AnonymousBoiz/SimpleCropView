@@ -52,7 +52,7 @@ dependencies {
 //    annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:$permissionsDispatcherVersion"
 //  implementation "com.tbruyelle.rxpermissions2:rxpermissions:$rxPermissionsVersion"
 //  implementation 'com.github.tbruyelle:rxpermissions:0.12'
-    implementation project(':rxpermissons')
+//    implementation project(':rxpermissons')
 
 //  implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
 //  implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
