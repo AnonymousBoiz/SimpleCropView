@@ -1,49 +1,44 @@
 apply plugin: 'com.android.library'
-apply plugin: 'maven-publish'
 
-dependencies {
-  implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-  implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
-  // Because RxAndroid releases are few and far between, it is recommended you also
-  // explicitly depend on RxJava's latest version for bug fixes and new features.
-  // (see https://github.com/ReactiveX/RxJava/releases for latest 3.x.x version)
-  implementation 'io.reactivex.rxjava3:rxjava:3.1.5'
-
-//  implementation 'androidx.test:monitor:1.7.2'
-//  implementation 'androidx.test.ext:junit-ktx:1.2.1'
-//  androidTestImplementation 'org.testng:testng:6.9.6'
-}
 
 android {
-  namespace 'com.isseiaoki.simplecropview'
-  compileSdk 34
+    namespace 'com.isseiaoki.simplecropview'
+    compileSdk 34
 
-  defaultConfig {
-    minSdk 21
-    targetSdk 34
-    versionCode 26
-    versionName "1.1.8"
-    consumerProguardFiles 'proguard-rules.pro'
-  }
+    defaultConfig {
+        minSdk 21
+        targetSdk 34
+        versionCode 26
+        versionName "1.1.8"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
 
 //  dexOptions {
 //    preDexLibraries = false
 //  }
 }
 
-def file = project.rootProject.file('local.properties')
-if (!file.exists()) return
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-//apply plugin: 'com.github.dcendents.android-maven'
-//apply plugin: 'com.jfrog.bintray'
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
+    // Because RxAndroid releases are few and far between, it is recommended you also
+    // explicitly depend on RxJava's latest version for bug fixes and new features.
+    // (see https://github.com/ReactiveX/RxJava/releases for latest 3.x.x version)
+    implementation 'io.reactivex.rxjava3:rxjava:3.1.5'
 
-group = 'com.isseiaoki'
-version = '1.1.8'
-def siteUrl = 'https://github.com/IsseiAoki/SimpleCropView'
-def gitUrl = 'https://github.com/IsseiAoki/SimpleCropView.git'
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
+//  implementation 'androidx.test:monitor:1.7.2'
+//  implementation 'androidx.test.ext:junit-ktx:1.2.1'
+//  androidTestImplementation 'org.testng:testng:6.9.6'
+}
 
 //bintray {
 //

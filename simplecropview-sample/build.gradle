@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'maven-publish'
 
 android {
     namespace 'com.example.simplecropviewsample'
@@ -25,9 +24,9 @@ android {
 //            assets.srcDirs = ['src/main/assets', 'src/main/assets/']
 //        }
 //    }
-    lintOptions {
-        abortOnError false
-    }
+//    lintOptions {
+//        abortOnError false
+//    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
